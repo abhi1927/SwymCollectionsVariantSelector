@@ -1,0 +1,612 @@
+<style>
+  div#swym-variant-selection-modal {
+    z-index: 999999999 !important;
+  }
+  .swym-background-scroll-stop {
+    overflow: hidden;
+  }
+  button.swym-zoomed-image-close-button.close-button {
+    position: relative;
+    top: 1%;
+    font-size: 20px;
+    border-radius: 100px;
+    cursor: pointer;
+    border: 1px solid #c2c0c0;
+}
+  .zoomed-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 999999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.zoomed-image img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+}
+  button#swym-collections {
+    top: 1%;
+    left: 1%;
+    position: absolute;
+    padding: 5px;
+  }
+
+  div#swym-multiple-wishlist-container::-webkit-scrollbar-thumb {
+     background-color: #434655 ;   
+  }
+  div#swym-multiple-wishlist-container::-webkit-scrollbar {
+    width: 4px;
+  }
+  #swym-product-title {
+    white-space: pre-wrap;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    text-transform: uppercase;
+  }
+  .swym-button.swym-add-to-wishlist-view-product.swym-heart:after {
+    position: relative;
+    font-family: 'swym-font';
+    right: 0px;
+    top: 1px;
+    font-size: 20px;
+  }
+  .swym-custom-not-loaded {
+    display: none !important;
+  }
+  .swym-radio-buttons-container::-webkit-scrollbar {
+    height: 6px;
+  }
+  .swym-radio-buttons-container::-webkit-scrollbar-thumb {
+     background-color: #434655 ;   
+  }
+  .swym-radio-buttons-container::-webkit-scrollbar {
+    width:5px;
+  }
+
+  svg.icon-heart.swym-adaptive-icon {
+      margin-left: 10px;
+  }
+  .swym-create-list-disabled {
+    color: #d8d2d2 !important;
+    cursor: default !important;
+    border: 1px dashed #d8d2d2;
+    pointer-events: none !important;
+  }
+  input.swym-dynamic-lists::selection {
+    background: #a4d0f8;
+  }
+  div#swym-new-list-input-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  button#swym-new-input-field {
+    cursor: pointer;
+    font-size: 12px;
+    white-space: nowrap;
+    border: 1px solid #434655;
+    border-radius: 5px;
+    height: 30px;
+    background: #434655;
+    color: white;
+    font-family: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    min-height: unset;
+  }
+  
+  p#swym-select-prefernces-text {
+    font-weight: bold;
+    font-size: 13px;
+    font-family: inherit;
+    text-align: center;
+  }
+
+  div#swym-multiple-wishlist-container::-webkit-autobar {
+       display: unset;
+       width: 4px;
+    }
+        
+    div#swym-multiple-wishlist-container::-webkit-autobar-track {
+       background-color: #c9c9c9;
+    }
+        
+    div#swym-multiple-wishlist-container::-webkit-autobar-thumb {
+       background-color: #434655;
+       border-radius: 5px;
+    }
+
+    .swym-radio-buttons-container::-webkit-autobar {
+     display: unset;
+     height: 3px !important;
+    }
+    
+  .swym-radio-buttons-container::-webkit-autobar-track {
+      background-color: #c9c9c9;
+    }
+    
+  .swym-radio-buttons-container::-webkit-autobar-thumb {
+      background-color: #434655;
+      border-radius: 5px;
+    }
+  .swym-button-disabled {
+      background: #c9c9c9 !important;
+      cursor: default !important;
+      pointer-events: none !important;
+   }
+    div#swym-multiple-wishlist {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    span.swym-wishlist-cta {
+      font-family: inherit !important;
+    }
+  
+     p#swym-multiple-wishlist-text {
+      font-weight: bold;
+      font-size: 13px;
+      font-family: inherit;
+    }
+    
+    .swym-dynamic-lists {
+      width: 100%;
+      border: 3px solid #434655;
+      font-family: inherit;
+      font-weight: bold;
+      font-size: 13px;
+      text-align: center;
+      margin: 10px;
+      height: 30px;
+    }
+    
+     label.list-container.list-selected {
+      background: #434655;
+      color: white;
+      display: flex;
+    }
+
+    div#swym-radio-and-ml-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+     label.list-container {
+      display: flex;
+      padding: 5px;
+      border: 1px solid #434655;
+      border-radius: 5px;
+      font-size: 12px;
+      justify-content: center;
+      align-items: center;
+      height: fit-content;
+      width: 100%;
+      cursor: pointer;
+      max-width: 140px;
+      font-family: inherit;
+      margin-bottom: 10px;
+    }
+
+    div#swym-multiple-wishlist-container {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-between;
+      max-height: 90px;
+      height: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+      margin-top: 5px;
+      width: 100%;
+      overflow-y: auto;
+      padding: 5px;
+    }
+  
+    div#swym-variant-modal-buttons {
+      display: flex;
+      flex-direction: row-reverse;
+      flex-wrap: nowrap;
+      padding: 5px;
+      justify-content: center;
+      align-items: flex-end;
+      margin-top: -15px;
+    }
+    
+    button#swym-custom-create-list-button {
+      padding: 5px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      color: #434655;
+      height: 40px;
+      border-radius: 5px;
+      margin: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      border-style: dashed;
+      border: 1px dashed #434655;
+      font-family: inherit;
+    }
+  
+    .swym-dynamic-data {
+      white-space: nowrap;
+      font-weight: bold;
+      padding-top: 3px;
+      padding-bottom: 3px;
+      font-size: 12px;  
+      font-family: inherit;
+    }
+    
+   div#swym-dynamic-product-data-container {
+      display: flex;
+      padding: 10px;
+      justify-content: center;
+      flex-direction: column;
+      margin-left: 10px;
+    }
+  
+   div#swym-variant-image-container {
+      display: flex;
+      padding: 15px;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: -30px;
+    }
+  
+    img#swym-variant-image {
+      max-width: 200px;
+      border: 1px solid grey;
+      max-width: 200px;
+      border-radius: 5px;
+      width: 140px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24), 0 4px 8px rgba(0, 0, 0, 0.12);
+      cursor: pointer;
+    }
+
+    label.swym-filter-labels:hover {
+         transition: transform 0.1s ease-in-out;
+          transform: scale(1.08);
+    }
+    .swym-radio-buttons-container {
+      display: inline-flex;
+      padding-bottom: 5px;
+      max-height: 80px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      overflow-y: auto;
+    }
+
+    .swym-filter-option-name {
+      display: flex;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      overflow: auto;
+      width: 100%;
+      flex-direction: row;
+      justify-content: flex-start;
+      overflow: auto;
+    }
+
+    div#swym-radio-container {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      overflow-x: hidden;
+      align-items: center;
+      border: 1px solid grey;
+      border-radius: 5px;
+      padding: 5px;
+      width: 98%;
+      padding-left: 10px;
+    }
+
+    label.swym-filter-labels {
+      display: inline-flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding: 5px;
+      border: 1px solid #434655;
+      border-radius: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: inherit;
+      font-size: 11px;
+      align-content: stretch;
+      margin: 4px;
+   }
+  
+    label.swym-filter-labels.selected {
+      background: #434655;
+      color: white;
+    }
+  
+  button#swym-wishlist-collections-modal-btn {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background: #434655;
+    opacity: 1;
+    margin: 5px;
+    font-size: 12px;
+    font-family: inherit;
+    text-transform: capitalize;
+  }
+
+  div#swymOptionName {
+    display: flex;
+    margin-right: 10px;
+    font-family: inherit;
+    color: #434655;
+    font-size: 12px;
+    min-width: 60px;
+    width: auto;
+    justify-content: center;
+    border-radius: 5px;
+    align-items: center;
+    text-decoration: underline;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+   span#swym-close-btn {
+     display: flex;
+     cursor: pointer;
+     font-size: 20px;
+     justify-content: flex-end;
+  }
+
+/*   .swym-collections {
+      position: absolute;
+      z-index: 5;
+      right: 3%;
+      height: 29px;
+      font-size: 21px;
+      top: 2%;
+      border: none;
+      cursor: pointer;
+      background: none;
+   }
+ */
+    #swymWishlistButton {
+        background: #434655;
+        border-radius: 15px;
+        position: relative;
+        left: -4px;
+        top: 5px;
+        width: 35.5pc;
+    }
+
+    #swym-variant-selection-heading {
+      margin-top: -30px;
+      font-family: inherit;
+      color: #434655;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      flex-direction: row;
+    }
+
+    .swym-variant-selection-modal-container {
+      display: none;
+      position: fixed;
+      z-index: 999 !important;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: rgba(0, 0, 0, 0.4);
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .swym-variant-modal-content {
+      background-color: #fefefe;
+      padding: 10px;
+      border: 2px solid #434655;
+      transition: transform 0.3s ease-in-out;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      max-width: 560px;
+    }
+
+    .swym-modal-heading {
+      display: flex;
+      align-items: stretch;
+      border-bottom: 2px solid #c4c4c4;
+      margin-bottom: 10px;
+      border: none;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+
+   .swym-variant-add-to-list-btn {
+      padding: 10px;
+      transition: background-color 0.3s ease-in-out;
+      background-color: #434655;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 5px !Important;
+    }
+
+    .swym-variant-add-to-list-btn.swym-disabled {
+        opacity: 0.7;
+    }
+
+    .swym-variant-add-to-list-btn:hover {
+        background-color: #333;
+    }
+   
+     @media only screen and (max-width: 600px) {
+        .swym-variant-modal-content {
+            padding: 10px;
+            
+        }
+       label.list-container {
+         max-width: 150px;
+       }
+        img#swym-variant-image {
+          width: 130px;
+        }
+        button.swym-zoomed-image-close-button.close-button {
+          border-radius: 100px;
+          cursor: pointer;
+          border: 1px solid #c2c0c0;
+      }
+     }
+    @media only screen and (max-width: 900px) {
+        .swym-variant-modal-content {
+            margin: 10% auto;
+        }
+    }
+      @media only screen and (min-width: 700px) {
+        .swym-variant-modal-content {
+            width: auto;
+        }
+       label.list-container:hover {
+        transition: transform 0.1s ease-in-out;
+        transform: scale(1.05);
+        }
+      button#swym-wishlist-collections-modal-btn:hover {
+        transition: transform 0.1s ease-in-out;
+        transform: scale(1.05);
+      }
+      
+      button#swym-custom-create-list-button:hover {
+        transition: transform 0.1s ease-in-out;
+        transform: scale(1.05);
+      }
+      label.list-container.radio-button-label.list-selected:hover {
+      color: white;
+  }
+    }
+    
+    .swym-show-modal {
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+    }
+    .swym-hide-modal {
+        display: none;
+    }
+</style>
+
+<!-- The Swym Variant Modal HTML -->
+<div
+class="swym-variant-selection-modal-container swym-ui-component swym-is-safari"
+id="swym-variant-selection-modal"
+role="dialog"
+aria-labelledby="swym-variant-selection-heading"
+aria-modal="true"
+>
+<div class="swym-variant-modal-content">
+  <div id="swym-variant-modal-title">
+    <span 
+    id="swym-close-btn" 
+    class="swym-close-btn" 
+    role="button"
+    aria-label="Close"
+    >&times;</span>
+    <p 
+    id="swym-variant-selection-heading" 
+    class="swym-modal-heading"
+    >Add to Wishlist</p>
+  </div>
+  <div id="swym-variant-image-container">
+    <img 
+    id="swym-variant-image" 
+    src="" 
+    alt="Product image"
+    aria-label="Product Image"
+    >
+    <div id="swym-dynamic-product-data-container">
+      <p 
+      id="swym-product-vendor" 
+      class="swym-dynamic-data" 
+      aria-label="Product vendor"
+      ></p>
+      <p 
+      id="swym-product-title" 
+      class="swym-dynamic-data" 
+      aria-label="Product title"
+      ></p>
+      <p 
+      id="swym-variant-title" 
+      class="swym-dynamic-data" 
+      aria-label="Variant title"
+      ></p>
+      <p 
+      id="swym-variant-price" 
+      class="swym-dynamic-data" 
+      aria-label="Variant price"
+      ></p>
+    </div>
+  </div>
+  <div class="swym-modal-heading">
+    <p 
+    id="swym-select-prefernces-text" 
+    aria-label="Select preferences"
+    >Select Preferences</p>
+    <div id="swym-radio-and-ml-container">
+      <div 
+      id="swym-radio-container" 
+      role="radiogroup" 
+      aria-label="Preferences"
+      ></div>
+      <div id="swym-multiple-wishlist">
+        <p 
+        id ="swym-multiple-wishlist-text" 
+        aria-label="Multiple wishlist options"
+        ></p>
+        <div id="swym-new-list-input-container"></div>
+        <div 
+        id="swym-multiple-wishlist-container" 
+        aria-label="Wishlist options"
+        ></div>
+      </div>
+     </div>
+   <div id="swym-variant-modal-buttons">
+    <button 
+    onclick="addToMultipleListOnclick(event)" 
+    id="swym-wishlist-collections-modal-btn" 
+    class="swym-variant-add-to-list-btn swym-button swym-bg-2 swym-color-4 swym-disabled"
+    data-swaction="addToWishlist"
+    aria-label="Add to wishlist"
+    >Add To Wishlist</button>
+    <button 
+    id="swym-custom-create-list-button"
+    aria-label="Create a new list"
+    >Create A New List +</button>
+  </div>
+</div>
